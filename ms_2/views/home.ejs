@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table, th, td {
+                border: 1px solid;
+            }
+            table {
+                border-collapse: collapse;
+            }
+            a.disabled { 
+                pointer-events: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>This is second microservice .. Welcome, welcome... </h1>
+        
+        <button><a href="/refresh_trips">Refresh Trips please.. </a></button>
+        
+<pre>
+Here will be the trips available to simulate , you have to refresh them if you're first to enter here, or if you changed entites in ms_1 ( e.g added a trip ).
+
+Anyways, anyways, only single trip can be simulted, but you know, quality over quantity
+
+Since we're not using mongo to fetch trips, make sure ms_1 is up and running, we're rabbiting at it ( rpc-ing )
+</pre>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Trip ID</th>
+                    <th>Trip name</th>
+                    <th>Simulation</th>
+                    <th>Driver ID</th>
+                    <th>Car ID</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% trips.forEach(function(trip){ %>
+                    <tr>
+                        <td><%= trip.id %></td>
+                        <td><%= trip.trip_name %></td>
+                        <td><%= trip.trip_simulation %></td>
+                        <td><%= trip.driver %></td>
+                        <td><%= trip.car %></td>
+                        <td>
+                            <button <%= simulating_trip_id === null ? 'active' : 'disabled' %>>
+                                <a href="/simulate/<%= trip.id %>" class="<%= simulating_trip_id === null ? 'active' : 'disabled' %>" %>">
+                                    <%= trip.trip_id === simulating_trip_id ? "I'm being simulated" : "Simulate me" %>
+                                </a>
+                            </button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table> 
+    </body>
+</html>

@@ -1,0 +1,41 @@
+[
+  {
+    "_id": "634e6725c12b916d9fa6ee63",
+    "name": "Ford",
+    "description": "A very good old car",
+    "year": 1957,
+    "engineSpecs": {
+      "horsepower": -1,
+      "cylinders": -1
+    },
+    "createdAt": "2022-10-18T08:43:17.488Z",
+    "updatedAt": "2022-10-18T08:43:17.488Z",
+    "__v": 0
+  },
+  {
+    "_id": "634e6746c12b916d9fa6ee65",
+    "name": "Mercedes C200",
+    "description": "A very good new car",
+    "year": 2002,
+    "engineSpecs": {
+      "horsepower": -1,
+      "cylinders": -1
+    },
+    "createdAt": "2022-10-18T08:43:50.397Z",
+    "updatedAt": "2022-10-18T08:43:50.397Z",
+    "__v": 0
+  },
+  {
+    "_id": "634e6764c12b916d9fa6ee68",
+    "name": "Mercedes AMG",
+    "description": "An excellent new car",
+    "year": 2020,
+    "engineSpecs": {
+      "horsepower": -1,
+      "cylinders": -1
+    },
+    "createdAt": "2022-10-18T08:44:20.989Z",
+    "updatedAt": "2022-10-18T08:44:20.989Z",
+    "__v": 0
+  }
+]

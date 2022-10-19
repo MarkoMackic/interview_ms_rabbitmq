@@ -1,0 +1,85 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  ms_1:
+    image: node:14
+    working_dir: /code/app
+    volumes:
+      - ./ms_1:/code/app
+      - ./common:/code/common
+    ports:
+      - "8080:80"
+    environment:
+      - PORT=80
+      - MONGODB_URL=mongodb://mongodb:27017/our_app_db
+      - RABBITMQ_URL=amqp://rabbitmq:5672/
+      - OPA_URL=http://opa:8181/
+      - OPA_ENABLED=false
+
+    command: sh -c "npm install && node index.js "
+    restart: on-failure
+    depends_on:
+      - mongodb
+      - opa
+      - rabbitmq
+
+  ms_2:
+    image: node:14
+    working_dir: /code/app
+    volumes:
+      - ./ms_2:/code/app
+      - ./common:/code/common
+    ports:
+      - "8081:80"
+    environment:
+      - PORT=80
+      - MONGODB_URL=mongodb://mongodb:27017/our_app_db
+      - RABBITMQ_URL=amqp://rabbitmq:5672/
+    command: sh -c "npm install && node index.js "
+    restart: on-failure
+    depends_on:
+      - ms_1
+      
+  ms_3:
+    image: node:14
+    working_dir: /code/app
+    volumes:
+      - ./ms_3:/code/app
+      - ./common:/code/common
+    ports:
+      - "8082:80"
+    environment:
+      - PORT=80
+      - MONGODB_URL=mongodb://mongodb:27017/our_app_db
+      - RABBITMQ_URL=amqp://rabbitmq:5672/
+    command: sh -c "npm install && node index.js "
+    restart: on-failure
+    depends_on:
+      - ms_2
+
+  opa: 
+    image: openpolicyagent/opa
+    volumes: 
+      - ./opa_data:/opa_data
+    command: run --bundle /opa_data/bundle.tar.gz --server
+
+
+  mongodb:
+    image: mongo:latest
+
+  mongo_seed:
+      image: mongo:latest
+      links:
+        - mongodb
+      volumes:
+        - ./mongo_dump:/mongo_dump
+      command:
+        /mongo_dump/import.sh #must be chmod +x
+
+  rabbitmq:
+    image: rabbitmq:3.10-management
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+

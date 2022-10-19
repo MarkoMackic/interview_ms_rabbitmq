@@ -1,0 +1,16 @@
+{
+  "name": "ms_3",
+  "version": "1.0.0",
+  "description": "Microservice 3",
+  "main": "index.js",
+  "author": "MarkoMackic",
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "convert-units": "^2.3.4",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^6.6.5",
+    "mongoose-id-validator": "^0.6.0"
+  }
+}

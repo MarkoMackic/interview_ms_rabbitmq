@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+        crossorigin=""></script>
+        <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+        <style>
+            head, body {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100vh;
+            }
+            #map {
+                background-color: rgba(0,0,0,0.1);
+                height: 100%;
+                width:100%; 
+            }
+
+            #controls {
+                width: 500px;
+                margin-left: -100px;
+                position: fixed;
+                z-index: 9999;
+                background-color: rgba(50, 50, 50, 0.5);
+                pointer-events: auto;
+                top: 0;
+                right: 0;
+                color: white;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id="map"></div>
+        <div id="controls">
+            <button disabled id="startsim">Start simulation</button>
+            <a href="/simview_api/stop_sim"><button>Stop simulation</button></a>
+            <hr/>
+            <pre id="car_info">
+
+            </pre>
+        </div>  
+
+        <script>
+            let map = L.map('map').setView([45.04643, 16.37782], 13);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            let car_marker = null;
+
+            fetch("/simview_api/get_initial_data").then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Something went wrong while fetching inital data..Please use stop simulation button, and if it brings up error, go to homepage');
+            }).then(function(data){
+                
+                let polyline = L.polyline(data.linestring.geometry.coordinates.map(a => [a[1], a[0]]), {color: 'red'}).addTo(map);
+                map.fitBounds(polyline.getBounds());
+                
+                let car_coord = data.car.coord.geometry.coordinates;
+
+                console.log(car_coord);
+
+                car_marker = L.marker([car_coord[1], car_coord[0]]).addTo(map)
+
+                // connect to websockets 
+                console.log(location.host);
+
+                const socket = new WebSocket("ws://" + location.host);
+
+                socket.onerror = (e) => {
+                    alert("Websocket error, what what ? ");
+                }
+
+                socket.onopen = () => document.querySelector("#startsim").disabled = false;
+
+                socket.onmessage = (event) => {
+                    let data = JSON.parse(event.data);
+
+                    let car_coord = data.coord.geometry.coordinates;
+
+                    car_marker.setLatLng([car_coord[1], car_coord[0]]).update();
+
+                    delete data['coord'];
+
+                    document.querySelector("#car_info").innerHTML = JSON.stringify(data, null, 4)
+                };                
+               
+            }).catch(window.alert);
+
+            document.querySelector('#startsim').addEventListener('click', function()
+            {
+                console.log("hey");
+                fetch("/simview_api/start_sim").then(async (response) => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('Something went wrong while starting simulation: ' + await response.text());
+                }).then(function(data){
+                    alert("Simulation started");
+                }).catch(alert)
+            });
+        
+
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,12 @@
+[
+  {
+    "_id": "634e69c8714e1b18c8557173",
+    "firstname": "Marko",
+    "lastname": "Mackic",
+    "birthDate": "1998-11-25T23:00:00.000Z",
+    "email": "markomackic@gmail.com",
+    "createdAt": "2022-10-18T08:54:32.051Z",
+    "updatedAt": "2022-10-18T08:54:32.051Z",
+    "__v": 0
+  }
+]

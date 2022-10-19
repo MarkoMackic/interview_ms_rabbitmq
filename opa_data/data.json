@@ -1,0 +1,102 @@
+{
+    "role_permissions": {
+        "admin": [
+            {
+                "action": "create",
+                "object": "car"
+            },
+            {
+                "action": "update",
+                "object": "car"
+            },
+            {
+                "action": "delete",
+                "object": "car"
+            },
+            {
+                "action": "create",
+                "object": "driver"
+            },
+            {
+                "action": "update",
+                "object": "driver"
+            },
+            {
+                "action": "delete",
+                "object": "driver"
+            },
+            {
+                "action": "create",
+                "object": "trip"
+            },
+            {
+                "action": "update",
+                "object": "trip"
+            },
+            {
+                "action": "delete",
+                "object": "trip"
+            }
+        ],
+        "driver_creator": [
+            {
+                "action": "create",
+                "object": "driver"
+            },
+            {
+                "action": "delete",
+                "object": "driver"
+            },
+            {
+                "action": "update",
+                "object": "driver"
+            }
+        ],
+        "driver_editor": [
+            {
+                "action": "update",
+                "object": "driver"
+            }
+        ],
+        "car_creator": [
+            {
+                "action": "create",
+                "object": "car"
+            },
+            {
+                "action": "delete",
+                "object": "car"
+            },
+            {
+                "action": "update",
+                "object": "car"
+            }
+        ],
+        "car_editor": [
+            {
+                "action": "update",
+                "object": "car"
+            }
+        ],
+        "trip_creator": [
+            {
+                "action": "create",
+                "object": "trip"
+            },
+            {
+                "action": "delete",
+                "object": "trip"
+            },
+            {
+                "action": "update",
+                "object": "trip"
+            }
+        ],
+        "trip_editor": [
+            {
+                "action": "update",
+                "object": "trip"
+            }
+        ]
+    }
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "_id": "634e6b4747aa1f55734e9fd8",
+    "trip_name": "BanjaLuka-NoviGrad-Marko",
+    "trip_simulation": "RANDOM",
+    "car": "634e6725c12b916d9fa6ee63",
+    "driver": "634e69c8714e1b18c8557173",
+    "createdAt": "2022-10-18T09:00:55.115Z",
+    "updatedAt": "2022-10-18T09:00:55.115Z",
+    "__v": 0
+  }
+]
