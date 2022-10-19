@@ -31,7 +31,7 @@ const shared_app_ctx = {
 function find_trip(tripID) {
     for(let trip of shared_app_ctx.trips)
     {
-        if(trip.trip_id == tripID)
+        if(trip.id == tripID)
             return trip;
     }
 
@@ -52,7 +52,7 @@ async function bootstrap_app() {
     app.get("/", (req, res) => res.render("home.ejs", shared_app_ctx));
 
     app.get("/simulate/:tripId", asyncHandler(async function(req, res) {
-        let trip = find_trip(req.params.tripID);
+        let trip = find_trip(req.params.tripId);
 
         if(!trip) {
             res.json({error: "Trip not found"});
