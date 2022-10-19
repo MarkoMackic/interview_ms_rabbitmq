@@ -36,7 +36,7 @@ Data is accumulative (e.g grouped per driver id).
 
 2. The benefit is centralized policy control inside a system. And also many ( probably ) cncf projects support it out of the box.. 
 
-3. It would run a another container ( e.g it's server implementation ) , so the whole stack has access to it.
+3. It would run a another container ( e.g its server implementation ) , so the whole stack has access to it.
 
 I'm not really thrilled by these simple abstractions ( e.g. Helm3 for example, come on, simple template preprocessor (you could use sed and kubectl for most
 of what you use helm for)), but if the whole stack supports them, then they are a good fit.
@@ -55,5 +55,5 @@ Thanks to all the OSS source maintainers for libraries used here, doc writers, a
 
 You can start by reading the code .. also when you do `docker-compose up`, check out localhost:8080 (ms_1), localhost:8081 (ms_2), localhost:8082 (ms_3)
 
-It can take time for npm install to do it's thing, so before trying anything wait for all containers to be up ( not up by `docker ps`), but up in a sense
+It can take time for npm install to do its thing, so before trying anything wait for all containers to be up ( not up by `docker ps`), but up in a sense
 you can access them from browser (8080, 8081, 8082).
