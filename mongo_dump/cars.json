@@ -1,6 +1,5 @@
 [
   {
-    "_id": "634e6725c12b916d9fa6ee63",
     "name": "Ford",
     "description": "A very good old car",
     "year": 1957,
@@ -13,7 +12,6 @@
     "__v": 0
   },
   {
-    "_id": "634e6746c12b916d9fa6ee65",
     "name": "Mercedes C200",
     "description": "A very good new car",
     "year": 2002,
@@ -26,7 +24,6 @@
     "__v": 0
   },
   {
-    "_id": "634e6764c12b916d9fa6ee68",
     "name": "Mercedes AMG",
     "description": "An excellent new car",
     "year": 2020,
