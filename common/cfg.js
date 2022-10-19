@@ -12,7 +12,7 @@ module.exports = {
         url: env.MONGODB_URL || "mongodb://localhost:27017/app_db"
     },
     opaConfig: {
-        enabled: Boolean(env.OPA_ENABLED),
+        enabled: env.OPA_ENABLED === "true",
         url: env.OPA_URL || "http://localhost:8181/"
     }
 }
